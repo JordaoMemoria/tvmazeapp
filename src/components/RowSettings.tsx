@@ -8,14 +8,17 @@ export default function RowSettings({
   activated,
   onChange,
 }: RowSettingsProps) {
-  const icon = activated ? 'toggle-on' : 'toggle-off';
-
   return (
     <Row>
       <TextButton>{text}</TextButton>
-      <Button onPress={() => onChange(!activated)}>
-        {/* <FontAwesome name={icon} size={45} color={styles.colors.primary} /> */}
-      </Button>
+      <Switch
+        value={activated}
+        trackColor={{true: styles.colors.primary}}
+        thumbColor={styles.colors.background}
+        onValueChange={(newValue: boolean) => {
+          onChange(newValue);
+        }}
+      />
     </Row>
   );
 }
@@ -35,4 +38,4 @@ const Row = styled.View`
   align-items: center;
   padding-right: 20px;
 `;
-const Button = styled.TouchableOpacity``;
+const Switch = styled.Switch``;

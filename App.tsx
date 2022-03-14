@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import styles from './src/common/styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {LogBox, View} from 'react-native';
 
 import WatchScreen from './src/screens/WatchScreen';
 import FavoriteScreen from './src/screens/FavoriteScreen';
@@ -15,7 +16,9 @@ import PasswordScreen from './src/screens/PasswordScreen';
 
 import store from './src/redux/app/store';
 import {Provider} from 'react-redux';
-import {LogBox} from 'react-native';
+import LoadingScreen from './src/screens/LoadingScreen';
+import {load} from './src/db/storage';
+import PINCodeCustom from './src/components/PINCodeCustom';
 
 const Tab = createBottomTabNavigator();
 const WatchStack = createNativeStackNavigator();
@@ -154,8 +157,6 @@ const SettingsStackScreen = () => {
 };
 
 const App = () => {
-  LogBox.ignoreLogs(['RCTBridge']);
-
   return (
     <NavigationContainer theme={WhiteTheme}>
       <Tab.Navigator
@@ -189,10 +190,42 @@ const App = () => {
   );
 };
 
-export default () => {
+export default function () {
+  LogBox.ignoreLogs(['RCTBridge']);
+
+  const [loadingPincode, setLoadingPincode] = useState(true);
+  const [enterPincode, setEnterPincode] = useState(true);
+  const [pincode, setPincode] = useState('');
+
+  useEffect(() => {
+    load('auth_config', (data: any) => {
+      data.pincode === '' ? setEnterPincode(false) : setPincode(data.pincode);
+      setLoadingPincode(false);
+    });
+  }, []);
+
+  if (loadingPincode) {
+    return (
+      <NavigationContainer>
+        <LoadingScreen />
+      </NavigationContainer>
+    );
+  } else if (enterPincode) {
+    return (
+      <NavigationContainer>
+        <PINCodeCustom
+          mode="enter"
+          pincode={pincode}
+          onFinish={() => {
+            setEnterPincode(false);
+          }}
+        />
+      </NavigationContainer>
+    );
+  }
   return (
     <Provider store={store}>
       <App />
     </Provider>
   );
-};
+}
