@@ -5,6 +5,16 @@ const save = async (data: any, key: string) => {
   await AsyncStorage.setItem(key, jsonWrite);
 };
 
+const saveConfig = async (pincode: string, authID: string) => {
+  save(
+    {
+      pincode,
+      authID,
+    },
+    'auth_config',
+  );
+};
+
 const load = async (key: string, callback: Function) => {
   const jsonRead = await AsyncStorage.getItem(key);
   const data = jsonRead != null ? JSON.parse(jsonRead) : [];
@@ -19,4 +29,4 @@ const load = async (key: string, callback: Function) => {
   }
 };
 
-export {save, load};
+export {save, load, saveConfig};

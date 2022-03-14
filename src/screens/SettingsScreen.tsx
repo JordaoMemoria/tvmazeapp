@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import RowSettings from '../components/RowSettings';
 import TouchID from 'react-native-touch-id';
-import {load, save} from '../db/storage';
+import {load, save, saveConfig} from '../db/storage';
 import PINCodeCustom from '../components/PINCodeCustom';
+import {Alert} from 'react-native';
 
 export default function SettingsScreen() {
   const [availableID, setAvailableID] = useState('');
@@ -17,29 +18,16 @@ export default function SettingsScreen() {
     if (pincodeScreenMode === 'choose') {
       setPincode(settedCode);
       setPincodeScreen(false);
-      save(
-        {
-          pincode: settedCode,
-          authID,
-        },
-        'auth_config',
-      );
+      saveConfig(settedCode, authID);
     } else if (pincodeScreenMode === 'enter') {
       setPincode('');
       setPincodeScreen(false);
-      save(
-        {
-          pincode: '',
-          authID,
-        },
-        'auth_config',
-      );
+      saveConfig('', authID);
     }
   };
 
   useEffect(() => {
     load('auth_config', (data: any) => {
-      console.log('Data:', data.pincode);
       setPincode(data.pincode);
       setAuthID(data.authID);
     });
@@ -82,14 +70,19 @@ export default function SettingsScreen() {
           text={availableID}
           activated={authID !== '' ? true : false}
           onChange={(newValue: boolean) => {
-            newValue ? setAuthID(availableID) : setAuthID('');
-            save(
-              {
-                pincode,
-                authID: newValue ? availableID : '',
-              },
-              'auth_config',
-            );
+            if (newValue) {
+              setAuthID(availableID);
+              saveConfig(pincode, availableID);
+            } else {
+              TouchID.authenticate()
+                .then(() => {
+                  setAuthID('');
+                  saveConfig(pincode, '');
+                })
+                .catch(() => {
+                  Alert.alert('ID not recognized');
+                });
+            }
           }}
         />
       ) : null}
