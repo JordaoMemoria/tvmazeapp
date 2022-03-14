@@ -39,6 +39,7 @@ export default function SettingsScreen() {
 
   useEffect(() => {
     load('auth_config', (data: any) => {
+      console.log('Data:', data.pincode);
       setPincode(data.pincode);
       setAuthID(data.authID);
     });

@@ -12,6 +12,8 @@ target 'jobsity_tvmaze' do
     :hermes_enabled => false
   )
 
+  pod 'RNExitApp', :path => '../node_modules/react-native-exit-app'
+
   target 'jobsity_tvmazeTests' do
     inherit! :complete
     # Pods for testing

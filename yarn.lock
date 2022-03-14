@@ -2069,7 +2069,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux@^7.1.20":
+"@types/react-redux@^7.1.20", "@types/react-redux@^7.1.23":
   "integrity" "sha512-D02o3FPfqQlfu2WeEYwh3x2otYd2Dk1o8wAfsA0B1C2AJEFxE663Ozu7JzuWbznGgW248NaOF6wsqCGNq9d3qw=="
   "resolved" "https://registry.npmjs.org/@types/react-redux/-/react-redux-7.1.23.tgz"
   "version" "7.1.23"
@@ -7366,6 +7366,11 @@
   "version" "0.2.2"
   dependencies:
     "lodash" "^4.17.15"
+
+"react-native-exit-app@^1.1.0":
+  "integrity" "sha512-Spne19zfMfJvnUTX909EHUqWMk69rATtLJq9XMBGpNSHhx0M7v5yetx2Z87egBhLOqQm+CWfD/oxWzDG8rbIQA=="
+  "resolved" "https://registry.npmjs.org/react-native-exit-app/-/react-native-exit-app-1.1.0.tgz"
+  "version" "1.1.0"
 
 "react-native-gesture-handler@*", "react-native-gesture-handler@^2.3.1", "react-native-gesture-handler@>= 1.0.0":
   "integrity" "sha512-Yq7cov7BMX9CTZ9oEIc6iX/XWgU5i88zSky7Vaq7deRQTq2s1REH4Idh0APEFLdHFWN/NKZMkHBRT7vaQAgvqg=="

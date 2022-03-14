@@ -4,7 +4,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import styles from './src/common/styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {LogBox, View} from 'react-native';
+import {Alert, LogBox} from 'react-native';
+import RNExitApp from 'react-native-exit-app';
+import PINCodeCustom from './src/components/PINCodeCustom';
+import TouchID from 'react-native-touch-id';
 
 import WatchScreen from './src/screens/WatchScreen';
 import FavoriteScreen from './src/screens/FavoriteScreen';
@@ -13,12 +16,11 @@ import SettingsScreen from './src/screens/SettingsScreen';
 import EpisodeScreen from './src/screens/EpisodeScreen';
 import PersonScreen from './src/screens/PersonScreen';
 import PasswordScreen from './src/screens/PasswordScreen';
+import LoadingScreen from './src/screens/LoadingScreen';
 
 import store from './src/redux/app/store';
 import {Provider} from 'react-redux';
-import LoadingScreen from './src/screens/LoadingScreen';
 import {load} from './src/db/storage';
-import PINCodeCustom from './src/components/PINCodeCustom';
 
 const Tab = createBottomTabNavigator();
 const WatchStack = createNativeStackNavigator();
@@ -194,12 +196,25 @@ export default function () {
   LogBox.ignoreLogs(['RCTBridge']);
 
   const [loadingPincode, setLoadingPincode] = useState(true);
+
   const [enterPincode, setEnterPincode] = useState(true);
   const [pincode, setPincode] = useState('');
 
+  const [enterAuthID, setEnterAuthID] = useState(true);
+
   useEffect(() => {
     load('auth_config', (data: any) => {
-      data.pincode === '' ? setEnterPincode(false) : setPincode(data.pincode);
+      setPincode(data.pincode);
+      if (data.pincode !== '' && data.authID !== '') {
+        setEnterPincode(false);
+      } else if (data.pincode !== '') {
+        setEnterAuthID(false);
+      } else if (data.authID !== '') {
+        setEnterPincode(false);
+      } else if (data.pincode === '' && data.authID === '') {
+        setEnterPincode(false);
+        setEnterAuthID(false);
+      }
       setLoadingPincode(false);
     });
   }, []);
@@ -222,6 +237,30 @@ export default function () {
         />
       </NavigationContainer>
     );
+  } else if (enterAuthID) {
+    TouchID.authenticate()
+      .then(() => {
+        setEnterAuthID(false);
+      })
+      .catch((error: any) => {
+        if (pincode !== '') {
+          setEnterAuthID(false);
+          setEnterPincode(true);
+        } else {
+          Alert.alert(
+            'Closing TV Maze',
+            'ID not recognized and pincode not setted.',
+            [
+              {
+                text: 'Ok',
+                onPress: () => {
+                  RNExitApp.exitApp();
+                },
+              },
+            ],
+          );
+        }
+      });
   }
   return (
     <Provider store={store}>

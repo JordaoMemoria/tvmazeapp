@@ -1,10 +1,10 @@
-import React from 'react'
-import styles from '../common/styles'
-import { Dimensions } from 'react-native'
-import styled from 'styled-components/native'
-import { CategoryRowProps } from '../typescript/interfaces'
+import React from 'react';
+import styles from '../common/styles';
+import {Dimensions} from 'react-native';
+import styled from 'styled-components/native';
+import {CategoryRowProps} from '../typescript/interfaces';
 
-export default function CategoryRow({ onChange, category }: CategoryRowProps) {
+export default function CategoryRow({onChange, category}: CategoryRowProps) {
   return (
     <FilterContainer>
       <SmallBlock />
@@ -16,9 +16,8 @@ export default function CategoryRow({ onChange, category }: CategoryRowProps) {
           <SmallBlock />
           <ButtonOff
             onPress={() => {
-              onChange('People')
-            }}
-          >
+              onChange('People');
+            }}>
             <LabelOff>People</LabelOff>
           </ButtonOff>
         </>
@@ -26,9 +25,8 @@ export default function CategoryRow({ onChange, category }: CategoryRowProps) {
         <>
           <ButtonOff
             onPress={() => {
-              onChange('Series')
-            }}
-          >
+              onChange('Series');
+            }}>
             <LabelOff>Series</LabelOff>
           </ButtonOff>
           <SmallBlock />
@@ -39,7 +37,7 @@ export default function CategoryRow({ onChange, category }: CategoryRowProps) {
       )}
       <SmallBlock />
     </FilterContainer>
-  )
+  );
 }
 
 const FilterContainer = styled.View`
@@ -52,10 +50,10 @@ const FilterContainer = styled.View`
   border-bottom-color: ${styles.colors.primary};
   flex-direction: row;
   justify-content: space-around;
-`
+`;
 const SmallBlock = styled.View`
   width: 10px;
-`
+`;
 const ButtonOn = styled.TouchableOpacity`
   background-color: ${styles.colors.primary};
   flex: 1;
@@ -63,11 +61,11 @@ const ButtonOn = styled.TouchableOpacity`
   height: 40px;
   justify-content: center;
   border-radius: 20px;
-`
+`;
 const LabelOn = styled.Text`
   font-size: ${styles.fonts.big}px;
   color: ${styles.colors.background};
-`
+`;
 const ButtonOff = styled.TouchableOpacity`
   background-color: ${styles.colors.background};
   flex: 1;
@@ -77,8 +75,8 @@ const ButtonOff = styled.TouchableOpacity`
   border-radius: 20px;
   border-width: 1px;
   border-color: ${styles.colors.primary};
-`
+`;
 const LabelOff = styled.Text`
   font-size: ${styles.fonts.big}px;
   color: ${styles.colors.primary};
-`
+`;
