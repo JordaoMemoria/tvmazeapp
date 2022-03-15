@@ -39,9 +39,7 @@ export default function SettingsScreen() {
           setAvailableID('Touch ID')
         }
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch(() => {})
   }, [])
 
   return pincodeScreen ? (
