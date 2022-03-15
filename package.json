@@ -64,6 +64,23 @@
       "jsx",
       "json",
       "node"
+    ],
+    "setupFiles": [
+      "./jest/setup.ts"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js",
+      "\\.(css|less)$": "<rootDir>/assetsTransformer.js"
+    },
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "./node_modules/@freakycoder/react-native-bounceable",
+      "./node_modules/@haskkor/react-native-pincode/",
+      "./node_modules/@haskkor/react-native-pincode/node_modules/",
+      "./node_modules/@haskkor/react-native-pincode/dist/",
+      "./node_modules/(?!(react-native|react-native-vector-icons|react-native-dynamic-search-bar|react-native-touch-id|@react-native|react-native-exit-app|react-native-keychain|@haskkor|react-native-pincode)/)"
     ]
   }
 }

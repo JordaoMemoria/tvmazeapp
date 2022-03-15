@@ -1,118 +1,124 @@
 interface ChangePageProps {
-  page: number;
-  next: Function;
-  back: Function;
+  page: number
+  next: Function
+  back: Function
 }
 
 interface CategoryRowProps {
-  onChange: Function;
-  category: string;
+  onChange: Function
+  category: string
 }
 
 interface FavProps {
-  onValueChange: Function;
-  value: boolean;
-  absolute: boolean;
+  onValueChange: Function
+  value: boolean
+  absolute: boolean
 }
 
 interface ItemProp {
-  id: number;
-  name: string;
-  image: string;
-  favorite: boolean;
-  showFavorite: boolean;
-  canClick: boolean;
-  category: string;
+  id: number
+  name: string
+  image: string
+  favorite: boolean
+  showFavorite: boolean
+  canClick: boolean
+  category: string
 }
 
 interface SearchProps {
-  searching: boolean;
-  onType: Function;
-  onCancel: Function;
-  category: string;
+  searching: boolean
+  onType: Function
+  onCancel: Function
+  category: string
 }
 
 interface NavigationProps {
-  navigation?: any;
-  route?: any;
+  navigation?: any
+  route?: any
 }
 
 interface ObjectData {
-  id: number;
-  name: string;
-  image: string;
+  id: number
+  name: string
+  image: string
 }
 
 interface Show {
-  id: number;
-  name: string;
+  id: number
+  name: string
   image: {
-    medium: string;
-  };
+    medium: string
+  }
 }
 
 interface ShowDetail {
-  id: number;
-  name: string;
+  id: number
+  name: string
   image: {
-    medium: string;
-  };
-  summary: string;
-  genres: string[];
+    medium: string
+  }
+  summary: string
+  genres: string[]
   schedule: {
-    time: string;
-    days: string[];
-  };
+    time: string
+    days: string[]
+  }
 }
 
 interface Episode {
-  id: number;
-  name: string;
-  number: number;
-  season: number;
+  id: number
+  name: string
+  number: number
+  season: number
 }
 
 interface EpisodeDetail extends Episode {
-  summary: string;
-  image: string;
+  summary: string
+  image: string
 }
 
 interface BlueSquareProps {
-  text: string;
-  center?: boolean;
+  text: string
+  center?: boolean
 }
 
 interface WhiteSquareProps {
-  text: string;
-  absolute?: boolean;
+  text: string
+  absolute?: boolean
 }
 
 interface RowButtonProps {
-  text: string;
-  onClick: any;
+  text: string
+  onClick: any
 }
 
 interface RowSettingsProps {
-  activated: boolean;
-  text: string;
-  onChange: (value: boolean) => void | Promise<void>;
+  activated: boolean
+  text: string
+  onChange: (value: boolean) => void | Promise<void>
 }
 
 interface Person {
-  id: number;
-  name: string;
-  image: string;
+  id: number
+  name: string
+  image: string
   show: {
-    id: number;
-    name: string;
-    image: string;
-  }[];
+    id: number
+    name: string
+    image: string
+  }[]
 }
 
 interface PinCodeProps {
-  mode: 'enter' | 'choose';
-  pincode: string;
-  onFinish: Function;
+  mode: "enter" | "choose"
+  pincode: string
+  onFinish: Function
+}
+
+interface ReactTestRendererJSON {
+  type: string
+  props: Object
+  children: any
 }
 
 export type {
@@ -133,4 +139,5 @@ export type {
   CategoryRowProps,
   RowSettingsProps,
   PinCodeProps,
-};
+  ReactTestRendererJSON,
+}

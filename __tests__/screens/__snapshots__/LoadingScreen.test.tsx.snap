@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoadingScreen /> Renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "justifyContent": "center",
+      },
+    ]
+  }
+>
+  <ActivityIndicator
+    color="#5AB5E8"
+    margin={0}
+    size="large"
+    style={
+      Array [
+        Object {
+          "marginTop": 0,
+        },
+      ]
+    }
+  />
+</View>
+`;

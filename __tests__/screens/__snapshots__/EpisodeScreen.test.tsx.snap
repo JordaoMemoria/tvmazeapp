@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EpisodeScreen /> Renders correctly 1`] = `
+<RCTScrollView
+  style={
+    Array [
+      Object {},
+    ]
+  }
+>
+  <View>
+    <ActivityIndicator
+      color="#5AB5E8"
+      margin={50}
+      size="large"
+      style={
+        Array [
+          Object {
+            "marginTop": 50,
+          },
+        ]
+      }
+    />
+  </View>
+</RCTScrollView>
+`;

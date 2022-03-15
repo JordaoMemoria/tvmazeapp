@@ -1,48 +1,48 @@
-import React, {useEffect, useState} from 'react';
-import styled from 'styled-components/native';
-import RowSettings from '../components/RowSettings';
-import TouchID from 'react-native-touch-id';
-import {load, save, saveConfig} from '../db/storage';
-import PINCodeCustom from '../components/PINCodeCustom';
-import {Alert} from 'react-native';
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components/native'
+import RowSettings from '../components/RowSettings'
+import TouchID from 'react-native-touch-id'
+import { load, saveConfig } from '../db/storage'
+import PINCodeCustom from '../components/PINCodeCustom'
+import { Alert } from 'react-native'
 
 export default function SettingsScreen() {
-  const [availableID, setAvailableID] = useState('');
-  const [authID, setAuthID] = useState('');
-  const [pincode, setPincode] = useState('');
+  const [availableID, setAvailableID] = useState('')
+  const [authID, setAuthID] = useState('')
+  const [pincode, setPincode] = useState('')
 
-  const [pincodeScreen, setPincodeScreen] = useState(false);
-  const [pincodeScreenMode, setPincodeScreenMode] = useState('choose') as any;
+  const [pincodeScreen, setPincodeScreen] = useState(false)
+  const [pincodeScreenMode, setPincodeScreenMode] = useState('choose') as any
 
   const onFinish = (settedCode: any) => {
     if (pincodeScreenMode === 'choose') {
-      setPincode(settedCode);
-      setPincodeScreen(false);
-      saveConfig(settedCode, authID);
+      setPincode(settedCode)
+      setPincodeScreen(false)
+      saveConfig(settedCode, authID)
     } else if (pincodeScreenMode === 'enter') {
-      setPincode('');
-      setPincodeScreen(false);
-      saveConfig('', authID);
+      setPincode('')
+      setPincodeScreen(false)
+      saveConfig('', authID)
     }
-  };
+  }
 
   useEffect(() => {
     load('auth_config', (data: any) => {
-      setPincode(data.pincode);
-      setAuthID(data.authID);
-    });
+      setPincode(data.pincode)
+      setAuthID(data.authID)
+    })
     TouchID.isSupported()
-      .then(biometryType => {
+      .then((biometryType) => {
         if (biometryType === 'FaceID') {
-          setAvailableID('Face ID');
+          setAvailableID('Face ID')
         } else {
-          setAvailableID('Touch ID');
+          setAvailableID('Touch ID')
         }
       })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
 
   return pincodeScreen ? (
     <PINCodeCustom
@@ -53,15 +53,15 @@ export default function SettingsScreen() {
   ) : (
     <Scroll>
       <RowSettings
-        text="PIN number"
+        text='PIN number'
         activated={pincode !== '' ? true : false}
         onChange={(newValue: boolean) => {
           if (newValue) {
-            setPincodeScreen(true);
-            setPincodeScreenMode('choose');
+            setPincodeScreen(true)
+            setPincodeScreenMode('choose')
           } else {
-            setPincodeScreen(true);
-            setPincodeScreenMode('enter');
+            setPincodeScreen(true)
+            setPincodeScreenMode('enter')
           }
         }}
       />
@@ -71,23 +71,23 @@ export default function SettingsScreen() {
           activated={authID !== '' ? true : false}
           onChange={(newValue: boolean) => {
             if (newValue) {
-              setAuthID(availableID);
-              saveConfig(pincode, availableID);
+              setAuthID(availableID)
+              saveConfig(pincode, availableID)
             } else {
               TouchID.authenticate()
                 .then(() => {
-                  setAuthID('');
-                  saveConfig(pincode, '');
+                  setAuthID('')
+                  saveConfig(pincode, '')
                 })
                 .catch(() => {
-                  Alert.alert('ID not recognized');
-                });
+                  Alert.alert('ID not recognized')
+                })
             }
           }}
         />
       ) : null}
     </Scroll>
-  );
+  )
 }
 
-const Scroll = styled.ScrollView``;
+const Scroll = styled.ScrollView``
