@@ -2,7 +2,7 @@
 
 This app was developed as a React Native challenge in order to get hired from Jobsity.
 
-All the mandatory and bonus features was implemented (Face ID and Touch will work just on physical devices).
+All the mandatory and bonus features was implemented (Face ID and Touch ID will work just on physical devices).
 
 As a plus, some extra features was developed: is possible to add, remove and list favorite people besides series just like was asked to do with series.
 
