@@ -1,6 +1,6 @@
 # TV Maze
 
-This app was developed as a React Native challenge in order to get hired from Jobsity.
+This app was developed as a React Native challenge in order to show my skills.
 
 All the mandatory and bonus features was implemented (Face ID and Touch ID will work just on physical devices).
 
@@ -23,7 +23,8 @@ The project folder will be a little bit big because of this file (34,6 MB).
 
 1. Run `cd ios && pod install`
 2. Run `cd ..`
-3. Run `npx react-native run-ios`
+3. Open the Xcode, configure the Signing & Capabilities adding a Team Account
+4. Run `npx react-native run-ios`
 
 ### Android
 
